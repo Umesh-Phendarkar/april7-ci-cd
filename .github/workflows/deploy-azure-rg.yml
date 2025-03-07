@@ -35,4 +35,3 @@ jobs:
       run: terraform apply -auto-approve
       env:
         TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # Ensure the secret is passed here
-

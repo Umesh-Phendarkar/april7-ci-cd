@@ -12,10 +12,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Initialize Terraform
-        uses: hashicorp/terraform-github-actions@v1.5.0
+      - name: Setup Terraform
+        uses: hashicorp/terraform-github-actions@v1.4.0
         with:
           tf_version: '1.4.5'
+
+      - name: Initialize Terraform
+        uses: hashicorp/terraform-github-actions@v1.4.0
+        with:
           tf_action: 'init'
           args: |
             -backend-config="address=${TF_CLOUD_ADDRESS}"
@@ -24,18 +28,16 @@ jobs:
             -backend-config="workspace=${TF_CLOUD_WORKSPACE}"
 
       - name: Plan Terraform
-        uses: hashicorp/terraform-github-actions@v1.5.0
+        uses: hashicorp/terraform-github-actions@v1.4.0
         with:
-          tf_version: '1.4.5'
           tf_action: 'plan'
           args: |
             -var="resource_group_location=eastus"
             -var="resource_group_name_prefix=rg"
 
       - name: Apply Terraform
-        uses: hashicorp/terraform-github-actions@v1.5.0
+        uses: hashicorp/terraform-github-actions@v1.4.0
         with:
-          tf_version: '1.4.5'
           tf_action: 'apply'
           args: |
             -auto-approve
@@ -50,3 +52,4 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+

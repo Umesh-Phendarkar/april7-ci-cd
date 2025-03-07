@@ -24,14 +24,14 @@ jobs:
     - name: Terraform Initialization
       run: terraform init
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for the Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token
 
     - name: Terraform Plan
       run: terraform plan
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for the Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for the Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token

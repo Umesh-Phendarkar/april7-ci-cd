@@ -21,17 +21,22 @@ jobs:
       with:
         terraform_version: '1.0.11'  # Specify the Terraform version you want to use
 
+    - name: Terraform Login
+      run: terraform login
+      env:
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}
+
     - name: Terraform Initialization
       run: terraform init
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}
 
     - name: Terraform Plan
       run: terraform plan
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
       env:
-        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}  # GitHub Secret for Terraform Cloud API Token
+        TFC_TOKEN: ${{ secrets.TFC_TOKEN }}

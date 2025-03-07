@@ -1,31 +1,21 @@
-# Configure Azure Provider
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = ">= 3.59.0"
-    } 
-  }
-  required_version = ">= 0.14.9"
-}
-
+# Configure the Azure provider
 provider "azurerm" {
   features {}
-
-  skip_provider_registration = "true"
-  
-  # Connection to Azure
-  subscription_id = var.subscription_id
-  client_id = var.client_id
-  client_secret = var.client_secret
-  tenant_id = var.tenant_id
 }
 
-variable "prefix" {
-  default = "terraform"
+# Define the Azure Resource Group
+resource "azurerm_resource_group" "example" {
+  name     = "example-resource-group"
+  location = "East US"
 }
 
-resource "azurerm_resource_group" "rg90" {
-  name     = "resource_group_90"
-  location = "Central India"
+# Backend configuration for Terraform Cloud
+terraform {
+  backend "remote" {
+    organization = "april-org"  # Replace with your Terraform Cloud organization
+
+    workspaces {
+      name = "april02ci-cd"  # Replace with your workspace name in Terraform Cloud
+    }
+  }
 }
